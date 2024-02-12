@@ -1,0 +1,12 @@
+
+version: 2
+
+sources:
+  - name: recommender_system_raw_data
+    description: "raw data from the recommender system"
+    database: mlops
+    schema: source
+    tables:
+    - name: scores
+    - name: movies
+    - name: users
