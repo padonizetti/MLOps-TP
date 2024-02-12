@@ -1,0 +1,6 @@
+[32m2024-02-12 18:06:54 -0300[0m - dagster - [34mDEBUG[0m - all_assets - ec2d1f5c-4a35-45af-920a-3459ef6e0d92 - 61710 - LOGS_CAPTURED - Started capturing logs in process (pid: 61710).
+[32m2024-02-12 18:06:54 -0300[0m - dagster - [34mDEBUG[0m - all_assets - ec2d1f5c-4a35-45af-920a-3459ef6e0d92 - 61710 - airbyte_sync_37f3a - STEP_START - Started execution of step "airbyte_sync_37f3a".
+[32m2024-02-12 18:06:55 -0300[0m - dagster - [34mINFO[0m - all_assets - ec2d1f5c-4a35-45af-920a-3459ef6e0d92 - airbyte_sync_37f3a - Job 12 initialized for connection_id=37f3aa48-6c1b-4538-a87e-c581ceed73a8.
+[32m2024-02-12 18:08:05 -0300[0m - dagster - [34mDEBUG[0m - all_assets - ec2d1f5c-4a35-45af-920a-3459ef6e0d92 - 61710 - airbyte_sync_37f3a - STEP_OUTPUT - Yielded output "scores" of type "Nothing". (Type check passed).
+[32m2024-02-12 18:08:05 -0300[0m - dagster - [34mDEBUG[0m - all_assets - ec2d1f5c-4a35-45af-920a-3459ef6e0d92 - 61710 - airbyte_sync_37f3a - ASSET_MATERIALIZATION - Materialized value recommender_system_raw_data scores.
+[32m2024-02-12 18:08:05 -0300[0m - dagster - [34mDEBUG[0m - all_assets - ec2d1f5c-4a35-45af-920a-3459ef6e0d92 - 61710 - airbyte_sync_37f3a - STEP_SUCCESS - Finished execution of step "airbyte_sync_37f3a" in 1m11s.

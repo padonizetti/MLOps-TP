@@ -1,0 +1,6 @@
+[32m2024-02-12 18:06:54 -0300[0m - dagster - [34mDEBUG[0m - all_assets - ec2d1f5c-4a35-45af-920a-3459ef6e0d92 - 61711 - LOGS_CAPTURED - Started capturing logs in process (pid: 61711).
+[32m2024-02-12 18:06:54 -0300[0m - dagster - [34mDEBUG[0m - all_assets - ec2d1f5c-4a35-45af-920a-3459ef6e0d92 - 61711 - airbyte_sync_58102 - STEP_START - Started execution of step "airbyte_sync_58102".
+[32m2024-02-12 18:06:55 -0300[0m - dagster - [34mINFO[0m - all_assets - ec2d1f5c-4a35-45af-920a-3459ef6e0d92 - airbyte_sync_58102 - Job 11 initialized for connection_id=5810266c-4630-43b5-b19b-7d6c169c7f5a.
+[32m2024-02-12 18:08:05 -0300[0m - dagster - [34mDEBUG[0m - all_assets - ec2d1f5c-4a35-45af-920a-3459ef6e0d92 - 61711 - airbyte_sync_58102 - STEP_OUTPUT - Yielded output "movies" of type "Nothing". (Type check passed).
+[32m2024-02-12 18:08:05 -0300[0m - dagster - [34mDEBUG[0m - all_assets - ec2d1f5c-4a35-45af-920a-3459ef6e0d92 - 61711 - airbyte_sync_58102 - ASSET_MATERIALIZATION - Materialized value recommender_system_raw_data movies.
+[32m2024-02-12 18:08:05 -0300[0m - dagster - [34mDEBUG[0m - all_assets - ec2d1f5c-4a35-45af-920a-3459ef6e0d92 - 61711 - airbyte_sync_58102 - STEP_SUCCESS - Finished execution of step "airbyte_sync_58102" in 1m11s.

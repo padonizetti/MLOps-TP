@@ -1,0 +1,205 @@
+2024-02-12 21:06:55 [46mplatform[0m > Docker volume job log path: /tmp/workspace/11/0/logs.log
+2024-02-12 21:06:55 [46mplatform[0m > Executing worker wrapper. Airbyte version: 0.50.48
+2024-02-12 21:06:55 [46mplatform[0m > Attempt 0 to save workflow id for cancellation
+2024-02-12 21:06:55 [46mplatform[0m > start sync worker. job id: 11 attempt id: 0
+2024-02-12 21:06:55 [46mplatform[0m > 
+2024-02-12 21:06:55 [46mplatform[0m > ----- START REPLICATION -----
+2024-02-12 21:06:55 [46mplatform[0m > 
+2024-02-12 21:06:55 [46mplatform[0m > Running destination...
+2024-02-12 21:06:55 [46mplatform[0m > Using default value for environment variable SIDECAR_KUBE_CPU_LIMIT: '2.0'
+2024-02-12 21:06:55 [46mplatform[0m > Using default value for environment variable SIDECAR_KUBE_CPU_LIMIT: '2.0'
+2024-02-12 21:06:55 [46mplatform[0m > Using default value for environment variable SOCAT_KUBE_CPU_LIMIT: '2.0'
+2024-02-12 21:06:55 [46mplatform[0m > Using default value for environment variable SOCAT_KUBE_CPU_LIMIT: '2.0'
+2024-02-12 21:06:55 [46mplatform[0m > Using default value for environment variable SIDECAR_KUBE_CPU_REQUEST: '0.1'
+2024-02-12 21:06:55 [46mplatform[0m > Using default value for environment variable SIDECAR_KUBE_CPU_REQUEST: '0.1'
+2024-02-12 21:06:55 [46mplatform[0m > Using default value for environment variable SOCAT_KUBE_CPU_REQUEST: '0.1'
+2024-02-12 21:06:55 [46mplatform[0m > Using default value for environment variable SOCAT_KUBE_CPU_REQUEST: '0.1'
+2024-02-12 21:06:55 [46mplatform[0m > Using default value for environment variable LAUNCHDARKLY_KEY: ''
+2024-02-12 21:06:55 [46mplatform[0m > Using default value for environment variable LAUNCHDARKLY_KEY: ''
+2024-02-12 21:06:55 [46mplatform[0m > Checking if airbyte/source-file:0.3.15 exists...
+2024-02-12 21:06:55 [46mplatform[0m > Checking if airbyte/destination-postgres:0.6.0 exists...
+2024-02-12 21:06:55 [46mplatform[0m > airbyte/source-file:0.3.15 was found locally.
+2024-02-12 21:06:55 [46mplatform[0m > airbyte/destination-postgres:0.6.0 was found locally.
+2024-02-12 21:06:55 [46mplatform[0m > Creating docker container = destination-postgres-write-11-0-kxteg with resources io.airbyte.config.ResourceRequirements@2897279c[cpuRequest=0.5,cpuLimit=1,memoryRequest=1Gi,memoryLimit=2Gi,additionalProperties={}] and allowedHosts null
+2024-02-12 21:06:55 [46mplatform[0m > Creating docker container = source-file-read-11-0-igcga with resources io.airbyte.config.ResourceRequirements@43445fe4[cpuRequest=0.5,cpuLimit=1,memoryRequest=1Gi,memoryLimit=2Gi,additionalProperties={}] and allowedHosts io.airbyte.config.AllowedHosts@100ecdf9[hosts=[*, *.datadoghq.com, *.datadoghq.eu, *.sentry.io],additionalProperties={}]
+2024-02-12 21:06:55 [46mplatform[0m > Preparing command: docker run --rm --init -i -w /data/11/0 --log-driver none --name destination-postgres-write-11-0-kxteg --network host -v airbyte_workspace:/data -v /tmp/airbyte_local:/local -e DEPLOYMENT_MODE=OSS -e WORKER_CONNECTOR_IMAGE=airbyte/destination-postgres:0.6.0 -e AUTO_DETECT_SCHEMA=true -e LAUNCHDARKLY_KEY= -e SOCAT_KUBE_CPU_REQUEST=0.1 -e SOCAT_KUBE_CPU_LIMIT=2.0 -e FIELD_SELECTION_WORKSPACES= -e USE_STREAM_CAPABLE_STATE=true -e WORKER_ENVIRONMENT=DOCKER -e AIRBYTE_ROLE=dev -e APPLY_FIELD_SELECTION=false -e WORKER_JOB_ATTEMPT=0 -e OTEL_COLLECTOR_ENDPOINT=http://host.docker.internal:4317 -e FEATURE_FLAG_CLIENT=config -e AIRBYTE_VERSION=0.50.48 -e WORKER_JOB_ID=11 --cpus=1 --memory-reservation=1Gi --memory=2Gi airbyte/destination-postgres:0.6.0 write --config destination_config.json --catalog destination_catalog.json
+2024-02-12 21:06:55 [46mplatform[0m > Preparing command: docker run --rm --init -i -w /data/11/0 --log-driver none --name source-file-read-11-0-igcga -e CONCURRENT_SOURCE_STREAM_READ=false --network host -v airbyte_workspace:/data -v /tmp/airbyte_local:/local -e DEPLOYMENT_MODE=OSS -e WORKER_CONNECTOR_IMAGE=airbyte/source-file:0.3.15 -e AUTO_DETECT_SCHEMA=true -e LAUNCHDARKLY_KEY= -e SOCAT_KUBE_CPU_REQUEST=0.1 -e SOCAT_KUBE_CPU_LIMIT=2.0 -e FIELD_SELECTION_WORKSPACES= -e USE_STREAM_CAPABLE_STATE=true -e WORKER_ENVIRONMENT=DOCKER -e AIRBYTE_ROLE=dev -e APPLY_FIELD_SELECTION=false -e WORKER_JOB_ATTEMPT=0 -e OTEL_COLLECTOR_ENDPOINT=http://host.docker.internal:4317 -e FEATURE_FLAG_CLIENT=config -e AIRBYTE_VERSION=0.50.48 -e WORKER_JOB_ID=11 --cpus=1 --memory-reservation=1Gi --memory=2Gi airbyte/source-file:0.3.15 read --config source_config.json --catalog source_catalog.json
+2024-02-12 21:06:55 [46mplatform[0m > Reading messages from protocol version 0.2.0
+2024-02-12 21:06:55 [46mplatform[0m > Writing messages to protocol version 0.2.0
+2024-02-12 21:06:55 [46mplatform[0m > Reading messages from protocol version 0.2.0
+2024-02-12 21:06:55 [46mplatform[0m > readFromSource: start
+2024-02-12 21:06:55 [46mplatform[0m > Starting source heartbeat check. Will check every 1 minutes.
+2024-02-12 21:06:55 [46mplatform[0m > processMessage: start
+2024-02-12 21:06:55 [46mplatform[0m > readFromDestination: start
+2024-02-12 21:06:55 [46mplatform[0m > writeToDestination: start
+2024-02-12 21:07:00 [44msource[0m > Reading movies (https://raw.githubusercontent.com/mlops-itba/Datos-RS/main/data/peliculas_0.csv)...
+2024-02-12 21:07:00 [44msource[0m > TransportParams: None
+2024-02-12 21:07:01 [43mdestination[0m > WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+2024-02-12 21:07:01 [43mdestination[0m > WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+2024-02-12 21:07:01 [43mdestination[0m > WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+2024-02-12 21:07:01 [43mdestination[0m > WARN StatusConsoleListener The use of package scanning to locate plugins is deprecated and will be removed in a future release
+2024-02-12 21:07:02 [43mdestination[0m > 2024-02-12 21:07:02 [32mINFO[m i.a.i.d.p.PostgresDestination(main):128 - starting destination: class io.airbyte.integrations.destination.postgres.PostgresDestination
+2024-02-12 21:07:02 [43mdestination[0m > 2024-02-12 21:07:02 [32mINFO[m i.a.c.i.b.IntegrationCliParser(parseOptions):126 - integration args: {catalog=destination_catalog.json, write=null, config=destination_config.json}
+2024-02-12 21:07:02 [43mdestination[0m > 2024-02-12 21:07:02 [32mINFO[m i.a.c.i.b.IntegrationRunner(runInternal):132 - Running integration: io.airbyte.cdk.integrations.base.ssh.SshWrappedDestination
+2024-02-12 21:07:02 [43mdestination[0m > 2024-02-12 21:07:02 [32mINFO[m i.a.c.i.b.IntegrationRunner(runInternal):133 - Command: WRITE
+2024-02-12 21:07:02 [43mdestination[0m > 2024-02-12 21:07:02 [32mINFO[m i.a.c.i.b.IntegrationRunner(runInternal):134 - Integration config: IntegrationConfig{command=WRITE, configPath='destination_config.json', catalogPath='destination_catalog.json', statePath='null'}
+2024-02-12 21:07:02 [43mdestination[0m > 2024-02-12 21:07:02 [33mWARN[m c.n.s.JsonMetaSchema(newValidator):278 - Unknown keyword order - you should define your own Meta Schema. If the keyword is irrelevant for validation, just use a NonValidationKeyword
+2024-02-12 21:07:02 [43mdestination[0m > 2024-02-12 21:07:02 [33mWARN[m c.n.s.JsonMetaSchema(newValidator):278 - Unknown keyword airbyte_secret - you should define your own Meta Schema. If the keyword is irrelevant for validation, just use a NonValidationKeyword
+2024-02-12 21:07:02 [43mdestination[0m > 2024-02-12 21:07:02 [32mINFO[m i.a.c.i.b.s.SshWrappedDestination(getSerializedMessageConsumer):107 - No SSH connection options found, using defaults
+2024-02-12 21:07:02 [46mplatform[0m > Total records read: 1344 (508 KB)
+2024-02-12 21:07:02 [46mplatform[0m > Schema validation was performed to a max of 10 records with errors per stream.
+2024-02-12 21:07:02 [46mplatform[0m > readFromSource: done. (source.isFinished:true, fromSource.isClosed:false)
+2024-02-12 21:07:02 [46mplatform[0m > processMessage: done. (fromSource.isDone:true, forDest.isClosed:false)
+2024-02-12 21:07:02 [46mplatform[0m > thread status... heartbeat thread: false , replication thread: true
+2024-02-12 21:07:02 [46mplatform[0m > writeToDestination: done. (forDest.isDone:true, isDestRunning:true)
+2024-02-12 21:07:02 [46mplatform[0m > thread status... timeout thread: false , replication thread: true
+2024-02-12 21:07:03 [43mdestination[0m > 2024-02-12 21:07:03 [32mINFO[m i.a.c.i.b.s.SshTunnel(getInstance):252 - Starting connection with method: NO_TUNNEL
+2024-02-12 21:07:03 [43mdestination[0m > 2024-02-12 21:07:03 [32mINFO[m c.z.h.HikariDataSource(<init>):80 - HikariPool-1 - Starting...
+2024-02-12 21:07:03 [43mdestination[0m > 2024-02-12 21:07:03 [32mINFO[m c.z.h.HikariDataSource(<init>):82 - HikariPool-1 - Start completed.
+2024-02-12 21:07:03 [43mdestination[0m > 2024-02-12 21:07:03 [32mINFO[m i.a.c.i.d.j.JdbcBufferedConsumerFactory(lambda$toWriteConfig$0):122 - Write config: WriteConfig{streamName=movies, namespace=null, outputSchemaName=source, tmpTableName=_airbyte_tmp_yyg_movies, outputTableName=_airbyte_raw_movies, syncMode=overwrite}
+2024-02-12 21:07:03 [43mdestination[0m > 2024-02-12 21:07:03 [32mINFO[m i.a.c.i.d.b.BufferManager(<init>):53 - Max 'memory' available for buffer allocation 296 MB
+2024-02-12 21:07:03 [43mdestination[0m > 2024-02-12 21:07:03 [32mINFO[m i.a.c.i.d.b.BufferManager(printQueueInfo):118 - [ASYNC QUEUE INFO] Global: max: 296.96 MB, allocated: 10 MB (10.0 MB), % used: 0.03367428551701215 | State Manager memory usage: Allocated: 10 MB, Used: 0 bytes, percentage Used 0.000000
+2024-02-12 21:07:03 [43mdestination[0m > 2024-02-12 21:07:03 [32mINFO[m i.a.c.i.d.FlushWorkers(start):98 - Start async buffer supervisor
+2024-02-12 21:07:03 [43mdestination[0m > 2024-02-12 21:07:03 [32mINFO[m i.a.c.i.d.AsyncStreamConsumer(start):138 - class io.airbyte.cdk.integrations.destination_async.AsyncStreamConsumer started.
+2024-02-12 21:07:03 [43mdestination[0m > 2024-02-12 21:07:03 [32mINFO[m i.a.c.i.d.FlushWorkers(printWorkerInfo):146 - [ASYNC WORKER INFO] Pool queue size: 0, Active threads: 0
+2024-02-12 21:07:03 [43mdestination[0m > 2024-02-12 21:07:03 [32mINFO[m i.a.c.i.d.j.JdbcBufferedConsumerFactory(lambda$onStartFunction$1):165 - Preparing raw tables in destination started for 1 streams
+2024-02-12 21:07:03 [43mdestination[0m > 2024-02-12 21:07:03 [32mINFO[m i.a.c.i.d.j.JdbcBufferedConsumerFactory(lambda$onStartFunction$1):170 - Preparing raw table in destination started for stream movies. schema: source, table name: _airbyte_raw_movies
+2024-02-12 21:07:03 [43mdestination[0m > 2024-02-12 21:07:03 [32mINFO[m i.a.c.i.d.j.JdbcBufferedConsumerFactory(lambda$onStartFunction$1):183 - Preparing raw tables in destination completed.
+2024-02-12 21:07:04 [43mdestination[0m > 2024-02-12 21:07:04 [32mINFO[m i.a.c.i.d.FlushWorkers(close):191 - Closing flush workers -- waiting for all buffers to flush
+2024-02-12 21:07:04 [43mdestination[0m > 2024-02-12 21:07:04 [32mINFO[m i.a.c.i.d.FlushWorkers(close):216 - REMAINING_BUFFERS_INFO
+2024-02-12 21:07:04 [43mdestination[0m >   Namespace: null Stream: movies -- remaining records: 1344
+2024-02-12 21:07:04 [43mdestination[0m > 2024-02-12 21:07:04 [32mINFO[m i.a.c.i.d.FlushWorkers(close):217 - Waiting for all streams to flush.
+2024-02-12 21:07:04 [43mdestination[0m > 2024-02-12 21:07:04 [32mINFO[m i.a.c.i.d.DetectStreamToFlush(getNextStreamToFlush):122 - flushing: trigger info: null - movies, time trigger: false , size trigger: true current threshold b: 0 bytes, queue size b: 720.29 KB, penalty b: 0 bytes, after penalty b: 720.29 KB
+2024-02-12 21:07:04 [43mdestination[0m > 2024-02-12 21:07:04 [32mINFO[m i.a.c.i.d.FlushWorkers(lambda$flush$1):152 - Flush Worker (147e4) -- Worker picked up work.
+2024-02-12 21:07:04 [43mdestination[0m > 2024-02-12 21:07:04 [32mINFO[m i.a.c.i.d.FlushWorkers(lambda$flush$1):154 - Flush Worker (147e4) -- Attempting to read from queue namespace: null, stream: movies.
+2024-02-12 21:07:04 [43mdestination[0m > 2024-02-12 21:07:04 [32mINFO[m i.a.c.i.d.GlobalMemoryManager(free):88 - Freeing 9748180 bytes..
+2024-02-12 21:07:04 [43mdestination[0m > 2024-02-12 21:07:04 [32mINFO[m i.a.c.i.d.FlushWorkers(lambda$flush$1):167 - Flush Worker (147e4) -- Batch contains: 1344 records, 720.29 KB bytes.
+2024-02-12 21:07:04 [43mdestination[0m > 2024-02-12 21:07:04 [32mINFO[m i.a.c.i.d.GlobalMemoryManager(free):88 - Freeing 0 bytes..
+2024-02-12 21:07:04 [43mdestination[0m > 2024-02-12 21:07:04 [32mINFO[m i.a.c.i.d.GlobalMemoryManager(free):88 - Freeing 737580 bytes..
+2024-02-12 21:07:04 [43mdestination[0m > 2024-02-12 21:07:04 [32mINFO[m i.a.c.i.d.FlushWorkers(lambda$flush$1):176 - Flush Worker (147e4) -- Worker finished flushing. Current queue size: 0
+2024-02-12 21:07:05 [43mdestination[0m > 2024-02-12 21:07:05 [32mINFO[m i.a.c.i.d.FlushWorkers(close):220 - Closing flush workers -- all buffers flushed
+2024-02-12 21:07:05 [43mdestination[0m > 2024-02-12 21:07:05 [32mINFO[m i.a.c.i.d.GlobalMemoryManager(free):88 - Freeing 0 bytes..
+2024-02-12 21:07:05 [43mdestination[0m > 2024-02-12 21:07:05 [32mINFO[m i.a.c.i.d.FlushWorkers(close):228 - Closing flush workers -- supervisor shut down
+2024-02-12 21:07:05 [43mdestination[0m > 2024-02-12 21:07:05 [32mINFO[m i.a.c.i.d.FlushWorkers(close):230 - Closing flush workers -- Starting worker pool shutdown..
+2024-02-12 21:07:05 [43mdestination[0m > 2024-02-12 21:07:05 [32mINFO[m i.a.c.i.d.FlushWorkers(close):235 - Closing flush workers  -- workers shut down
+2024-02-12 21:07:05 [43mdestination[0m > 2024-02-12 21:07:05 [32mINFO[m i.a.c.i.d.b.BufferManager(close):92 - Buffers cleared..
+2024-02-12 21:07:05 [43mdestination[0m > 2024-02-12 21:07:05 [32mINFO[m i.a.c.i.d.AsyncStreamConsumer(close):219 - class io.airbyte.cdk.integrations.destination_async.AsyncStreamConsumer closed
+2024-02-12 21:07:05 [43mdestination[0m > 2024-02-12 21:07:05 [32mINFO[m i.a.c.i.b.IntegrationRunner(runInternal):231 - Completed integration: io.airbyte.cdk.integrations.base.ssh.SshWrappedDestination
+2024-02-12 21:07:05 [43mdestination[0m > 2024-02-12 21:07:05 [32mINFO[m i.a.i.d.p.PostgresDestination(main):130 - completed destination: class io.airbyte.integrations.destination.postgres.PostgresDestination
+2024-02-12 21:07:05 [43mdestination[0m > Destination process done (exit code 0)
+2024-02-12 21:07:05 [43mdestination[0m > Skipping in-connector normalization
+2024-02-12 21:07:05 [46mplatform[0m > readFromDestination: done. (writeToDestFailed:false, dest.isFinished:true)
+2024-02-12 21:07:05 [46mplatform[0m > thread status... timeout thread: false , replication thread: true
+2024-02-12 21:07:05 [46mplatform[0m > sync summary: {
+  "status" : "completed",
+  "recordsSynced" : 0,
+  "bytesSynced" : 0,
+  "startTime" : 1707772015642,
+  "endTime" : 1707772025228,
+  "totalStats" : {
+    "bytesCommitted" : 521189,
+    "bytesEmitted" : 521189,
+    "destinationStateMessagesEmitted" : 0,
+    "destinationWriteEndTime" : 1707772025221,
+    "destinationWriteStartTime" : 1707772015644,
+    "meanSecondsBeforeSourceStateMessageEmitted" : 0,
+    "maxSecondsBeforeSourceStateMessageEmitted" : 0,
+    "maxSecondsBetweenStateMessageEmittedandCommitted" : 0,
+    "meanSecondsBetweenStateMessageEmittedandCommitted" : 0,
+    "recordsEmitted" : 1344,
+    "recordsCommitted" : 1344,
+    "replicationEndTime" : 1707772025227,
+    "replicationStartTime" : 1707772015642,
+    "sourceReadEndTime" : 1707772022839,
+    "sourceReadStartTime" : 1707772015644,
+    "sourceStateMessagesEmitted" : 0
+  },
+  "streamStats" : [ {
+    "streamName" : "movies",
+    "stats" : {
+      "bytesCommitted" : 521189,
+      "bytesEmitted" : 521189,
+      "recordsEmitted" : 1344,
+      "recordsCommitted" : 1344
+    }
+  } ],
+  "performanceMetrics" : {
+    "processFromSource" : {
+      "elapsedTimeInNanos" : 54532600,
+      "executionCount" : 1344,
+      "avgExecTimeInNanos" : 40574.85119047619
+    },
+    "readFromSource" : {
+      "elapsedTimeInNanos" : 6879696438,
+      "executionCount" : 1458,
+      "avgExecTimeInNanos" : 4718584.66255144
+    },
+    "processFromDest" : {
+      "elapsedTimeInNanos" : 0,
+      "executionCount" : 0,
+      "avgExecTimeInNanos" : "NaN"
+    },
+    "writeToDest" : {
+      "elapsedTimeInNanos" : 26252334,
+      "executionCount" : 1344,
+      "avgExecTimeInNanos" : 19532.98660714286
+    },
+    "readFromDest" : {
+      "elapsedTimeInNanos" : 9260672267,
+      "executionCount" : 17245,
+      "avgExecTimeInNanos" : 537006.2201797622
+    }
+  }
+}
+2024-02-12 21:07:05 [46mplatform[0m > failures: [ ]
+2024-02-12 21:07:05 [46mplatform[0m > 
+2024-02-12 21:07:05 [46mplatform[0m > ----- END REPLICATION -----
+2024-02-12 21:07:05 [46mplatform[0m > 
+2024-02-12 21:07:05 [46mplatform[0m > Docker volume job log path: /tmp/workspace/11/0/logs.log
+2024-02-12 21:07:05 [46mplatform[0m > Executing worker wrapper. Airbyte version: 0.50.48
+2024-02-12 21:07:05 [46mplatform[0m > Attempt 0 to save workflow id for cancellation
+2024-02-12 21:07:05 [46mplatform[0m > 
+2024-02-12 21:07:05 [46mplatform[0m > ----- START DEFAULT NORMALIZATION -----
+2024-02-12 21:07:05 [46mplatform[0m > 
+2024-02-12 21:07:05 [46mplatform[0m > Running with normalization version: airbyte/normalization:0.4.3
+2024-02-12 21:07:05 [46mplatform[0m > Checking if airbyte/normalization:0.4.3 exists...
+2024-02-12 21:07:05 [46mplatform[0m > airbyte/normalization:0.4.3 was found locally.
+2024-02-12 21:07:05 [46mplatform[0m > Creating docker container = normalization-normalize-11-0-nnrys with resources io.airbyte.config.ResourceRequirements@58ae18ae[cpuRequest=,cpuLimit=,memoryRequest=,memoryLimit=,additionalProperties={}] and allowedHosts null
+2024-02-12 21:07:05 [46mplatform[0m > Preparing command: docker run --rm --init -i -w /data/11/0/normalize --log-driver none --name normalization-normalize-11-0-nnrys --network host -v airbyte_workspace:/data -v /tmp/airbyte_local:/local -e DEPLOYMENT_MODE=OSS -e WORKER_ENVIRONMENT=DOCKER -e AIRBYTE_ROLE=dev -e AIRBYTE_VERSION=0.50.48 airbyte/normalization:0.4.3 run --integration-type postgres --config destination_config.json --catalog destination_catalog.json
+2024-02-12 21:07:05 [42mnormalization[0m > Running: transform-config --config destination_config.json --integration-type postgres --out /data/11/0/normalize
+2024-02-12 21:07:09 [42mnormalization[0m > Namespace(config='destination_config.json', integration_type=<DestinationType.POSTGRES: 'postgres'>, out='/data/11/0/normalize')
+2024-02-12 21:07:09 [42mnormalization[0m > transform_postgres
+2024-02-12 21:07:09 [42mnormalization[0m > Running: transform-catalog --integration-type postgres --profile-config-dir /data/11/0/normalize --catalog destination_catalog.json --out /data/11/0/normalize/models/generated/ --json-column _airbyte_data
+2024-02-12 21:07:13 [42mnormalization[0m > Processing destination_catalog.json...
+2024-02-12 21:07:13 [42mnormalization[0m >   Generating airbyte_ctes/source/movies_ab1.sql from movies
+2024-02-12 21:07:13 [42mnormalization[0m >   Generating airbyte_ctes/source/movies_ab2.sql from movies
+2024-02-12 21:07:13 [42mnormalization[0m >   Generating airbyte_ctes/source/movies_ab3.sql from movies
+2024-02-12 21:07:13 [42mnormalization[0m >   Adding drop table hook for movies_scd to movies
+2024-02-12 21:07:13 [42mnormalization[0m >   Generating airbyte_tables/source/movies.sql from movies
+2024-02-12 21:07:13 [42mnormalization[0m > detected no config file for ssh, assuming ssh is off.
+2024-02-12 21:07:31 [42mnormalization[0m >            [--event-buffer-size EVENT_BUFFER_SIZE]
+2024-02-12 21:07:31 [42mnormalization[0m >   --event-buffer-size EVENT_BUFFER_SIZE
+2024-02-12 21:07:31 [46mplatform[0m > 
+2024-02-12 21:07:31 [42mnormalization[0m > DBT >=1.0.0 detected; using 10K event buffer size
+2024-02-12 21:07:31 [46mplatform[0m > 
+2024-02-12 21:07:49 [42mnormalization[0m > Running with dbt=1.0.0
+2024-02-12 21:07:49 [42mnormalization[0m > Partial parse save file not found. Starting full parse.
+2024-02-12 21:07:59 [42mnormalization[0m > [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 2 unused configuration paths:
+- models.airbyte_utils.generated.airbyte_incremental
+- models.airbyte_utils.generated.airbyte_views
+
+2024-02-12 21:07:59 [42mnormalization[0m > Found 4 models, 0 tests, 0 snapshots, 0 analyses, 599 macros, 0 operations, 0 seed files, 1 source, 0 exposures, 0 metrics
+2024-02-12 21:08:00 [42mnormalization[0m > Concurrency: 8 threads (target='prod')
+2024-02-12 21:08:01 [42mnormalization[0m > 1 of 1 START table model source.movies.................................................................................. [RUN]
+2024-02-12 21:08:02 [42mnormalization[0m > 1 of 1 OK created table model source.movies............................................................................. [[32mSELECT 1344[0m in 1.36s]
+2024-02-12 21:08:02 [42mnormalization[0m > Finished running 1 table model in 3.31s.
+2024-02-12 21:08:02 [42mnormalization[0m > [32mCompleted successfully[0m
+2024-02-12 21:08:02 [42mnormalization[0m > Done. PASS=1 WARN=0 ERROR=0 SKIP=0 TOTAL=1
+2024-02-12 21:08:03 [46mplatform[0m > Terminating normalization process...
+2024-02-12 21:08:03 [46mplatform[0m > Normalization process successfully terminated.
+2024-02-12 21:08:03 [46mplatform[0m > Normalization executed in 57 seconds for job 11.
+2024-02-12 21:08:03 [46mplatform[0m > Normalization summary: io.airbyte.config.NormalizationSummary@212941a2[startTime=1707772025425,endTime=1707772083419,failures=[],additionalProperties={}]
+2024-02-12 21:08:03 [46mplatform[0m > 
+2024-02-12 21:08:03 [46mplatform[0m > ----- END DEFAULT NORMALIZATION -----
+2024-02-12 21:08:03 [46mplatform[0m > 
