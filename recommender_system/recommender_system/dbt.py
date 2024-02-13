@@ -7,3 +7,6 @@ from .constants import dbt_manifest_path
 @dbt_assets(manifest=dbt_manifest_path)
 def db_postgres_dbt_assets(context: AssetExecutionContext, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
+
+
+

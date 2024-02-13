@@ -161,6 +161,7 @@ cython_debug/
 
 # MLflow
 mlruns/
+mlartifacts
 
 # MacOS auto-generated files
 .DS_Store
@@ -172,3 +173,5 @@ mlflow_data/1
 dbs/data
 datasets
 
+#dagster home
+dagster_home

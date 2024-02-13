@@ -1,6 +1,8 @@
-postgres_data_folder=gcs://mi-empresa/posgres_data
+postgres_data_folder=/Users/paolodonizetti/proj/itba_mlops/MLOps-TP/dbs/data/postgres
 POSTGRES_USER=postgres
-POSTGRES_PASSWORD=password
+POSTGRES_PASSWORD=__
 POSTGRES_HOST=localhost:5432
 MLFLOW_POSTGRES_DB=mlflow_db
-MLFLOW_ARTIFACTS_PATH==gcs://mi-empresa/mlflow
+MLFLOW_ARTIFACTS_PATH=/Users/paolodonizetti/proj/itba_mlops/MLOps-TP/mlflow_data
+MLFLOW_TRACKING_URI=http://localhost:5000
+DAGSTER_HOME=/Users/paolodonizetti/proj/itba_mlops/MLOps-TP/dagster_home
