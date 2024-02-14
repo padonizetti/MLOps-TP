@@ -1,10 +1,14 @@
 import os
+import psycopg2
+import pandas as pd
 
-from dagster import Definitions, ScheduleDefinition, define_asset_job
+from dagster import Definitions, ScheduleDefinition, define_asset_job, AssetSelection
 from dagster_dbt import DbtCliResource
 from dagster import load_assets_from_package_module, FilesystemIOManager
+from dagster import IOManager, InputContext, OutputContext, InitResourceContext, io_manager
+from dagster import job, op, graph, resource, ResourceDefinition
 
-from .dbt import db_postgres_dbt_assets
+from .dbt import db_postgres_dbt_assets, training_data
 from .airbyte import airbyte_assets
 from .constants import dbt_project_dir
 from .schedules import schedules
@@ -12,9 +16,16 @@ from . import recommender
 
 from dagster_mlflow import mlflow_tracking
 
+postgres_host, postgres_port = os.getenv("POSTGRES_HOST").split(":")
+postgres_user = os.getenv("POSTGRES_USER")
+postgres_password = os.getenv("POSTGRES_PASSWORD")
+postgres_db = os.getenv("MLOPS_POSTGRES_DB")
+
 recommender_assets = load_assets_from_package_module(
     package_module=recommender, group_name='recommender'
 )
+
+all_assets = [airbyte_assets, db_postgres_dbt_assets, training_data, *recommender_assets]
 
 mlflow_resources = {
     'mlflow': {
@@ -23,6 +34,15 @@ mlflow_resources = {
         }            
     },
 }
+
+
+#data_ops_config = {
+#    'db_postgres_dbt_assets': {
+#        'config': {
+#            'io_manager_key': 'postgres_io_manager'
+#            }
+#    }
+#}
 
 training_config = {
     'keras_dot_product_model': {
@@ -35,21 +55,92 @@ training_config = {
     }
 }
 
-#io_manager = FilesystemIOManager(
+job_data_config = {
+    'resources': {
+        **mlflow_resources
+    },
+    'ops': {
+        #**data_ops_config,
+    }
+}
+
+job_training_config = {
+    'resources': {
+        **mlflow_resources,
+    },
+    'ops': {
+        **training_config
+    }
+}
+
+job_all_config = {
+    'resources': {
+        **mlflow_resources,
+
+    },
+    'ops': {
+        **training_config
+    }
+}
+
+get_data_job = define_asset_job(
+    name='get_data',
+    selection=['movies', 'users', 'scores', 'scores_movies_users'],
+    config=job_data_config
+)
+
+get_data_schedule = ScheduleDefinition(
+    job=get_data_job,
+    cron_schedule="0 * * * *",  # every hour
+)
+
+#@io_manager
+#def io_manager_data():
+#   return FilesystemIOManager(
 #    base_dir="data",  # Path is built relative to where `dagster dev` is run
-#)
+#    )
+
+class DBTAssetIOManager(IOManager):
+    def load_input(self, context: InputContext) -> pd.DataFrame:
+        conn = psycopg2.connect(
+        host=postgres_host,
+        port=postgres_port,
+        dbname=postgres_db,
+        user=postgres_user,
+        password=postgres_password
+       )
+        # Utiliza el nombre del modelo DBT como nombre de tabla
+        table_name = context.upstream_output.name
+        query = f"SELECT * FROM target.{table_name}"
+        df = pd.read_sql(query, conn)
+        return df
+    
+    def handle_output(self, context: OutputContext, obj):
+        # Implementación vacía si no necesitas guardar datos
+        pass
+
+@io_manager
+def dbt_asset_io_manager():
+    return DBTAssetIOManager()
 
 
 defs = Definitions(
-    assets=[db_postgres_dbt_assets, airbyte_assets, *recommender_assets],
+    assets=all_assets,
+    jobs=[
+        get_data_job,
+        define_asset_job("full_process", config=job_all_config),
+        define_asset_job(
+            "only_training",
+            # selection=['preprocessed_training_data', 'user2Idx', 'movie2Idx'],
+            selection=AssetSelection.groups('recommender'),
+            config=job_training_config
+        )
+    ],
     resources={
         "dbt": DbtCliResource(project_dir=os.fspath(dbt_project_dir)),
+        #"io_manager": io_manager_data,
+        "dbt_asset_io_manager": dbt_asset_io_manager
         #'mlflow': mlflow_tracking
     },
-    schedules=[
-        # update all assets once a day
-        ScheduleDefinition(
-            job=define_asset_job("all_assets", selection="*"), cron_schedule="@daily"
-        ),
-    ],
+    schedules=[get_data_schedule],
 )
