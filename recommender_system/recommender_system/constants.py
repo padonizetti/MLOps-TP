@@ -32,6 +32,3 @@ AIRBYTE_CONFIG = {
 }
 
 #
-DBT_PROJECT_DIR = os.path.abspath(os.path.join(os.getcwd(), "db_postgres"))
-DBT_PROFILES_DIR = os.path.expanduser("~/.dbt")
-DBT_CONFIG = {"project_dir": DBT_PROJECT_DIR, "profiles_dir": DBT_PROFILES_DIR}

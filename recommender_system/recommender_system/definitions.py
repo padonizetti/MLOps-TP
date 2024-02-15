@@ -8,7 +8,7 @@ from dagster import load_assets_from_package_module, FilesystemIOManager
 from dagster import IOManager, InputContext, OutputContext, InitResourceContext, io_manager
 from dagster import job, op, graph, resource, ResourceDefinition
 
-from .dbt import db_postgres_dbt_assets, training_data
+from .dbt import dbt_assets, training_data
 from .airbyte import airbyte_assets
 from .constants import dbt_project_dir
 from .schedules import schedules
@@ -16,16 +16,12 @@ from . import recommender
 
 from dagster_mlflow import mlflow_tracking
 
-postgres_host, postgres_port = os.getenv("POSTGRES_HOST").split(":")
-postgres_user = os.getenv("POSTGRES_USER")
-postgres_password = os.getenv("POSTGRES_PASSWORD")
-postgres_db = os.getenv("MLOPS_POSTGRES_DB")
-
 recommender_assets = load_assets_from_package_module(
     package_module=recommender, group_name='recommender'
 )
 
-all_assets = [airbyte_assets, db_postgres_dbt_assets, training_data, *recommender_assets]
+#all_assets = [airbyte_assets, db_postgres_dbt_assets, training_data, *recommender_assets]
+all_assets = [airbyte_assets, *dbt_assets, training_data, *recommender_assets]
 
 mlflow_resources = {
     'mlflow': {
@@ -34,7 +30,6 @@ mlflow_resources = {
         }            
     },
 }
-
 
 #data_ops_config = {
 #    'db_postgres_dbt_assets': {
@@ -100,30 +95,6 @@ get_data_schedule = ScheduleDefinition(
 #    base_dir="data",  # Path is built relative to where `dagster dev` is run
 #    )
 
-class DBTAssetIOManager(IOManager):
-    def load_input(self, context: InputContext) -> pd.DataFrame:
-        conn = psycopg2.connect(
-        host=postgres_host,
-        port=postgres_port,
-        dbname=postgres_db,
-        user=postgres_user,
-        password=postgres_password
-       )
-        # Utiliza el nombre del modelo DBT como nombre de tabla
-        table_name = context.upstream_output.name
-        query = f"SELECT * FROM target.{table_name}"
-        df = pd.read_sql(query, conn)
-        return df
-    
-    def handle_output(self, context: OutputContext, obj):
-        # Implementación vacía si no necesitas guardar datos
-        pass
-
-@io_manager
-def dbt_asset_io_manager():
-    return DBTAssetIOManager()
-
-
 defs = Definitions(
     assets=all_assets,
     jobs=[
@@ -137,9 +108,9 @@ defs = Definitions(
         )
     ],
     resources={
-        "dbt": DbtCliResource(project_dir=os.fspath(dbt_project_dir)),
+        "dbt": DbtCliResource(project_dir=os.fspath(dbt_project_dir),
+                              profiles_dir=str(os.path.expanduser("~/.dbt"))),
         #"io_manager": io_manager_data,
-        "dbt_asset_io_manager": dbt_asset_io_manager
         #'mlflow': mlflow_tracking
     },
     schedules=[get_data_schedule],
