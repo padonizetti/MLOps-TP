@@ -9,6 +9,11 @@ from dagster_mlflow import mlflow_tracking
 
 from .constants import dbt_manifest_path, dbt_project_dir
 
+postgres_host, postgres_port = os.getenv("POSTGRES_HOST").split(":")
+postgres_user = os.getenv("POSTGRES_USER")
+postgres_password = os.getenv("POSTGRES_PASSWORD")
+postgres_db = os.getenv("MLOPS_POSTGRES_DB")
+
 #@dbt_assets(manifest=dbt_manifest_path)
 #def db_postgres_dbt_assets(context: AssetExecutionContext, dbt: DbtCliResource):
 #    yield from dbt.cli(["build"], context=context).stream()
@@ -20,18 +25,13 @@ dbt_assets = load_assets_from_dbt_project(project_dir=str(dbt_project_dir), prof
        deps=get_asset_key_for_model(dbt_assets, "scores_movies_users")
        )
 def training_data(context: AssetExecutionContext)-> Output[pd.DataFrame]:
-    
-    postgres_host, postgres_port = os.getenv("POSTGRES_HOST").split(":")
-    postgres_user = os.getenv("POSTGRES_USER")
-    postgres_password = os.getenv("POSTGRES_PASSWORD")
-    postgres_db = os.getenv("MLOPS_POSTGRES_DB")
-    
+
     conn = psycopg2.connect(
-        host=postgres_host,
-        port=postgres_port,
-        dbname=postgres_db,
-        user=postgres_user,
-        password=postgres_password
+        host="localhost", #postgres_host,
+        port="5432", #postgres_port,
+        dbname="mlops", #postgres_db,
+        user="postgres", #postgres_user,
+        password="mysecretpassword" #postgres_password
     )
     training_data = pd.read_sql("SELECT * FROM target.scores_movies_users", conn)
     
