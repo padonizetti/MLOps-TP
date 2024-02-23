@@ -3,15 +3,16 @@ import os
 import psycopg2
 
 import pandas as pd
+from recommender_system.postgres_config import postgres_host, postgres_port, postgres_user, postgres_password, postgres_db
 
+print("postgres_host:", postgres_host)
+print("postgres_port:", postgres_port)
+print("postgres_user:", postgres_user)
+print("postgres_password:", postgres_password)
+print("postgres_db:", postgres_db)
 
 # %%
 def training_data():
-    
-    postgres_host, postgres_port = os.getenv("POSTGRES_HOST").split(":")
-    postgres_user = os.getenv("POSTGRES_USER")
-    postgres_password = os.getenv("POSTGRES_PASSWORD")
-    postgres_db = os.getenv("MLOPS_POSTGRES_DB")
     
     print("postgres_host:", postgres_host)
     print("postgres_port:", postgres_port)

@@ -11,10 +11,10 @@ from dagster import job, op, graph, resource, ResourceDefinition
 from .dbt import dbt_assets, training_data
 from .airbyte import airbyte_assets
 from .constants import dbt_project_dir
-from .schedules import schedules
+#from .schedules import schedules
 from . import recommender
 
-from dagster_mlflow import mlflow_tracking
+#from dagster_mlflow import mlflow_tracking
 
 recommender_assets = load_assets_from_package_module(
     package_module=recommender, group_name='recommender'
@@ -52,7 +52,7 @@ training_config = {
 
 job_data_config = {
     'resources': {
-        **mlflow_resources
+        **mlflow_resources,
     },
     'ops': {
         #**data_ops_config,
@@ -95,6 +95,10 @@ get_data_schedule = ScheduleDefinition(
 #    base_dir="data",  # Path is built relative to where `dagster dev` is run
 #    )
 
+#io_manager = FilesystemIOManager(
+#    base_dir="data",  # Path is built relative to where `dagster dev` is run
+#)
+
 defs = Definitions(
     assets=all_assets,
     jobs=[
@@ -110,7 +114,7 @@ defs = Definitions(
     resources={
         "dbt": DbtCliResource(project_dir=os.fspath(dbt_project_dir),
                               profiles_dir=str(os.path.expanduser("~/.dbt"))),
-        #"io_manager": io_manager_data,
+        #"io_manager": io_manager,
         #'mlflow': mlflow_tracking
     },
     schedules=[get_data_schedule],

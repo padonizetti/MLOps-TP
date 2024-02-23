@@ -30,5 +30,3 @@ AIRBYTE_CONFIG = {
     "username":  "airbyte", 
     "password":  "password",
 }
-
-#
