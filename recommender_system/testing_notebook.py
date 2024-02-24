@@ -2,7 +2,7 @@
 import mlflow
 import os
 
-os.environ['MLFLOW_TRACKING_URI'] = 'http://localhost:5001'
+os.environ['MLFLOW_TRACKING_URI'] = 'http://localhost:5000'
 mlflow_tracking_uri = os.environ.get('MLFLOW_TRACKING_URI')
 print(mlflow_tracking_uri)
 
