@@ -1,5 +1,12 @@
 # %%
 import mlflow
+import os
+
+os.environ['MLFLOW_TRACKING_URI'] = 'http://localhost:5001'
+mlflow_tracking_uri = os.environ.get('MLFLOW_TRACKING_URI')
+print(mlflow_tracking_uri)
+
+# %%
 logged_model = 'models:/keras_dot_product_model/1'
 
 # Load model as a PyFuncModel.
