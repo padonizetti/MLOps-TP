@@ -1,12 +1,10 @@
 import os
-import psycopg2
 import pandas as pd
 
 from dagster import Definitions, ScheduleDefinition, define_asset_job, AssetSelection
 from dagster_dbt import DbtCliResource
-from dagster import load_assets_from_package_module, FilesystemIOManager
-from dagster import IOManager, InputContext, OutputContext, InitResourceContext, io_manager
-from dagster import job, op, graph, resource, ResourceDefinition
+from dagster import load_assets_from_package_module
+from dagster import job, op, graph, resource
 
 from .dbt import dbt_assets, training_data
 from .airbyte import airbyte_assets
@@ -14,13 +12,12 @@ from .constants import dbt_project_dir
 #from .schedules import schedules
 from . import recommender
 
-#from dagster_mlflow import mlflow_tracking
 
 recommender_assets = load_assets_from_package_module(
     package_module=recommender, group_name='recommender'
 )
 
-#all_assets = [airbyte_assets, db_postgres_dbt_assets, training_data, *recommender_assets]
+
 all_assets = [airbyte_assets, *dbt_assets, training_data, *recommender_assets]
 
 mlflow_resources = {
@@ -89,15 +86,6 @@ get_data_schedule = ScheduleDefinition(
     cron_schedule="0 * * * *",  # every hour
 )
 
-#@io_manager
-#def io_manager_data():
-#   return FilesystemIOManager(
-#    base_dir="data",  # Path is built relative to where `dagster dev` is run
-#    )
-
-#io_manager = FilesystemIOManager(
-#    base_dir="data",  # Path is built relative to where `dagster dev` is run
-#)
 
 defs = Definitions(
     assets=all_assets,
@@ -115,7 +103,6 @@ defs = Definitions(
         "dbt": DbtCliResource(project_dir=os.fspath(dbt_project_dir),
                               profiles_dir=str(os.path.expanduser("~/.dbt"))),
         #"io_manager": io_manager,
-        #'mlflow': mlflow_tracking
     },
     schedules=[get_data_schedule],
 )
