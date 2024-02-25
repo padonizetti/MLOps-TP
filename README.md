@@ -128,21 +128,11 @@ Luego creae las conexiones entre las 3 sources y el destino. Luego realice el pr
 
 ## DBT
 
-Cree un entorno para DBT y configure el proyecto:
-
-```bash
-conda create -n mlops-dbt python=3.11
-conda activate mlops-dbt
-pip install dbt-postgres
-dbt init db_postgres
-```
-
-Inicie el proyecto de dbt:
+Inicie y configure el proyecto de dbt:
 
 ```bash
 dbt init db_postgres
 ```
-
 
 Configure la base de datos en ~/.dbt/profiles.yml. Al hacer el dbt init le van a solicitar los siguientes datos:
 
@@ -155,7 +145,7 @@ dbt_elt:
       host: localhost
       port: 5432
       user: postgres
-      pass: '****'
+      pass: pass
       dbname: mlops
       schema: target
 ```
