@@ -169,7 +169,7 @@ mlartifacts
 .LSOverride
 
 # dbs and datasets
-mlflow_data/1
+mlflow_data/
 dbs/data
 datasets
 
